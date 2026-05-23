@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-dm-sans: "DM Sans", sans-serif;
+    --font-dm-mono: "DM Mono", monospace;
+  }
+
+  body {
+    font-family: var(--font-dm-sans);
+  }
+}
+
+@layer utilities {
+  .font-dm-sans {
+    font-family: var(--font-dm-sans);
+  }
+  .font-mono {
+    font-family: var(--font-dm-mono);
+  }
+}
+
+/* Countdown pulse when < 60s */
+@keyframes pulse-red {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+.countdown-urgent {
+  animation: pulse-red 1s ease-in-out infinite;
+}
