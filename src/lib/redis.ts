@@ -30,7 +30,7 @@ export async function acquireLock(
 ): Promise<string | null> {
   const token = crypto.randomUUID();
   // SET key token NX PX ttlMs — only sets if key does not exist
-  const result = await redis.set(`lock:${key}`, token, "NX", "PX", ttlMs);
+  const result = await redis.set(`lock:${key}`, token, "PX", ttlMs, "NX");
   return result === "OK" ? token : null;
 }
 
