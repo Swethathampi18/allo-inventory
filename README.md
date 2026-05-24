@@ -4,8 +4,8 @@ A multi-warehouse inventory reservation system built with Next.js 14, Prisma, Po
 
 ## Live Demo
 
-> **URL**: `allo-inventory-blue.vercel.app
-` _(replace after deploy)_
+> **URL**: allo-inventory-blue.vercel.app
+
 
 ---
 
