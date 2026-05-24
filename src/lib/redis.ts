@@ -46,13 +46,10 @@ export async function acquireLock(
 ): Promise<string | null> {
   const token = crypto.randomUUID();
   const client = getRedis();
-  const result = await client.set(`lock:${key}`, token, {
-    NX: true,
-    PX: ttlMs,
-  } as Parameters<Redis["set"]>[2]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = await (client as any).set(`lock:${key}`, token, "NX", "PX", ttlMs);
   return result === "OK" ? token : null;
 }
-
 export async function releaseLock(key: string, token: string): Promise<void> {
   const script = `
     if redis.call("GET", KEYS[1]) == ARGV[1] then
