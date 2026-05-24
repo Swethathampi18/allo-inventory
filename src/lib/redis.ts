@@ -46,7 +46,10 @@ export async function acquireLock(
 ): Promise<string | null> {
   const token = crypto.randomUUID();
   const client = getRedis();
-  const result = await client.set(`lock:${key}`, token, "NX", "PX", ttlMs);
+  const result = await client.set(`lock:${key}`, token, {
+    NX: true,
+    PX: ttlMs,
+  } as Parameters<Redis["set"]>[2]);
   return result === "OK" ? token : null;
 }
 
