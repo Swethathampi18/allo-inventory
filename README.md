@@ -1,4 +1,4 @@
-# Allo Inventory – Take-Home Exercise
+# Allo Inventory – 22MIM10004
 
 A multi-warehouse inventory reservation system built with Next.js 14, Prisma, PostgreSQL, and Redis.
 
