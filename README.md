@@ -7,7 +7,6 @@ A multi-warehouse inventory reservation system built with Next.js 14, Prisma, Po
 allo-inventory-git-main-swethathampi18s-projects.vercel.app
 
 
----
 
 ## Local Development
 
