@@ -1,4 +1,3 @@
-// src/lib/redis.ts
 import Redis from "ioredis";
 
 const globalForRedis = globalThis as unknown as {
@@ -40,13 +39,14 @@ export const redis = new Proxy({} as Redis, {
     return value;
   },
 });
-// Distributed lock using SET NX PX
+
 export async function acquireLock(
   key: string,
   ttlMs: number = 5000
 ): Promise<string | null> {
   const token = crypto.randomUUID();
-  const result = await redis.set(`lock:${key}`, token, "NX", "PX", ttlMs);
+  const client = getRedis();
+  const result = await client.set(`lock:${key}`, token, "NX", "PX", ttlMs);
   return result === "OK" ? token : null;
 }
 
@@ -58,5 +58,6 @@ export async function releaseLock(key: string, token: string): Promise<void> {
       return 0
     end
   `;
-  await redis.eval(script, 1, `lock:${key}`, token);
+  const client = getRedis();
+  await client.eval(script, 1, `lock:${key}`, token);
 }
